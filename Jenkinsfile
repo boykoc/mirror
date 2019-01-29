@@ -149,7 +149,7 @@ pipeline {
                     
                     cd /usr/lib/ckan/default/src/ckan/ckanext
                     '''
-                Checkout SCM
+                checkout scm
                 sh '''
                     . /usr/lib/ckan/default/bin/activate
                     which pip
