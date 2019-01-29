@@ -163,7 +163,8 @@ pipeline {
                     pip install -r dev-requirements.txt
                     
                     cd ../ckanext-ontario_theme
-                    nosetests --with-pylons=test.ini --with-xunit --xunit-file=/var/lib/jenkins/workspace/ckan/nosetests.xml
+                    nosetests --with-pylons=test.ini --with-xunit
+                    --xunit-file=${WORKSPACE}/nosetests.xml
                     ls -lah
                    '''
             }
