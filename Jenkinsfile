@@ -163,14 +163,13 @@ pipeline {
                     pip install -r dev-requirements.txt
                     
                     cd ../ckanext-ontario_theme
-                    nosetests --with-pylons=test.ini --with-xunit
-                    --xunit-file=${WORKSPACE}/nosetests.xml
+                    nosetests --with-pylons=test.ini --with-xunit --xunit-file=${WORKSPACE}/nosetests.xml
                     ls -lah
                    '''
             }
             post {
                 always {
-                    xunit thresholds: [failed(failureThreshold: '100', unstableThreshold: '100')], tools: [Custom(customXSL: 'custom-to-junit.xsl', deleteOutputFiles: true, failIfNotNew: true, pattern: '**/nosetests.xml', skipNoTestFiles: false, stopProcessingIfError: true)]
+                    xunit thresholds: [failed(failureThreshold: '100', unstableThreshold: '100')], tools: [Custom(customXSL: '${JENKINS_HOME}/workspace/custom-to-junit.xsl', deleteOutputFiles: true, failIfNotNew: true, pattern: '**/nosetests.xml', skipNoTestFiles: false, stopProcessingIfError: true)]
                 }
             }
         }
@@ -206,7 +205,7 @@ pipeline {
                 sudo rm -rf /usr/lib/ckan
                 sudo rm -rf /etc/ckan
                 sudo rm -rf ckan
-                sudo rm -rf /var/lib/jenkins/ckan
+                sudo rm -rf ${WORKSPACE}
                '''            
         }
         success {
