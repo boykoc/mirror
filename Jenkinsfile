@@ -146,11 +146,13 @@ pipeline {
         stage('OntarioThemeTests') {
             steps {
                 sh '''
-                    . /usr/lib/ckan/default/bin/activate
-                    which pip
                     
                     cd /usr/lib/ckan/default/src/ckan/ckanext
-                    git clone https://github.com/boykoc/ckanext-ontario_theme.git
+                    '''
+                Checkout SCM
+                sh '''
+                    . /usr/lib/ckan/default/bin/activate
+                    which pip
                     cd ckanext-ontario_theme
                     python setup.py develop
                     pip install -r dev-requirements.txt
