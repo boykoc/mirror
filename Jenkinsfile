@@ -205,7 +205,7 @@ pipeline {
                 sudo rm -rf /usr/lib/ckan
                 sudo rm -rf /etc/ckan
                 sudo rm -rf ckan
-                sudo rm -rf ${WORKSPACE}
+                sudo rm -rf /var/lib/jenkins/ckan
                '''            
         }
         success {
