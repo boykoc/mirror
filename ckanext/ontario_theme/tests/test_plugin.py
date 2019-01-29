@@ -24,4 +24,4 @@ class TestOntarioThemePlugin(helpers.FunctionalTestBase):
         #eq_(u'200 OK', res._status)
         #ok_(('Content-Type', 'text/csv; charset=utf-8') in res._headerlist)
         #ok_(('Content-disposition', 'attachment; filename="output.csv"') in res._headerlist)
-        pass
+        eq_(False, True)
