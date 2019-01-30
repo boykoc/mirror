@@ -60,8 +60,7 @@ pipeline {
                     paster make-config ckan /etc/ckan/default/development.ini
 
                     echo "Add site url to config."
-                    sudo sed -i -e "s+ckan.site_url =+ckan.site_url =
-                    http://localhost+g" /etc/ckan/default/development.ini
+                    sudo sed -i -e "s+ckan.site_url =+ckan.site_url = http://localhost+g" /etc/ckan/default/development.ini
                    '''
             }
         }
