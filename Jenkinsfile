@@ -146,14 +146,11 @@ pipeline {
         stage('OntarioThemeTests') {
             steps {
                 sh '''
-                    
-                    cd /usr/lib/ckan/default/src/ckan/ckanext
-                    '''
-                checkout scm
-                sh '''
                     . /usr/lib/ckan/default/bin/activate
                     which pip
-                    cd ckanext-ontario_theme
+                    sudo cp -r ${WORKSPACE} /usr/lib/ckan/default/src/ckan/ckanext/ckanext-ontario_theme
+                    sudo chown -R jenkins:jenkins /usr/lib/ckan/default/src/ckan/ckanext/ckanext-ontario_theme
+                    cd /usr/lib/ckan/default/src/ckan/ckanext/ckanext-ontario_theme
                     python setup.py develop
                     pip install -r dev-requirements.txt
                     sed -i '/^ckan.plugins = / s/$/ ontario_theme/' /etc/ckan/default/development.ini
@@ -166,7 +163,6 @@ pipeline {
                     
                     cd ../ckanext-ontario_theme
                     nosetests --with-pylons=test.ini --with-xunit --xunit-file=${WORKSPACE}/nosetests.xml
-                    ls -lah
                    '''
             }
             post {
